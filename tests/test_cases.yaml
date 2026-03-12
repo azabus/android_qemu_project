@@ -1,0 +1,78 @@
+# Тест-кейсы для Android QEMU Automation
+
+test_suite:
+  name: "Android x86 QEMU Automation Tests"
+  version: "1.0"
+  author: "Student"
+  date: "2024"
+
+test_cases:
+  - id: TC001
+    name: "QEMU установлен"
+    description: "Проверка что QEMU установлен в системе"
+    command: "qemu-system-x86_64 --version"
+    expected_result: "Команда выполняется без ошибок"
+    priority: "critical"
+    
+  - id: TC002
+    name: "ADB установлен"
+    description: "Проверка что ADB установлен в системе"
+    command: "adb version"
+    expected_result: "Android Debug Bridge version"
+    priority: "critical"
+    
+  - id: TC003
+    name: "qemu-img установлен"
+    description: "Проверка что qemu-img установлен"
+    command: "qemu-img --version"
+    expected_result: "Команда выполняется без ошибок"
+    priority: "critical"
+    
+  - id: TC004
+    name: "Создание виртуального диска"
+    description: "Создание QCOW2 диска 8GB"
+    command: "qemu-img create -f qcow2 test.img 8G"
+    expected_result: "Image created successfully"
+    priority: "high"
+    
+  - id: TC005
+    name: "ADB devices команда"
+    description: "Получение списка ADB устройств"
+    command: "adb devices"
+    expected_result: "List of devices attached"
+    priority: "high"
+    
+  - id: TC006
+    name: "ADB connect команда"
+    description: "Подключение к устройству по сети"
+    command: "adb connect 127.0.0.1:5555"
+    expected_result: "connected to 127.0.0.1:5555"
+    priority: "high"
+    
+  - id: TC007
+    name: "ADB shell getprop"
+    description: "Получение свойств Android"
+    command: "adb shell getprop ro.build.version.release"
+    expected_result: "Версия Android (например 8.1)"
+    priority: "medium"
+    
+  - id: TC008
+    name: "ADB logcat команда"
+    description: "Получение логов Android"
+    command: "adb logcat -d"
+    expected_result: "Лог выведен в консоль"
+    priority: "medium"
+    
+  - id: TC009
+    name: "Запуск Python скрипта"
+    description: "Запуск main.py без ошибок"
+    command: "python3 src/android_qemu.py --help"
+    expected_result: "Скрипт запускается"
+    priority: "high"
+    
+  - id: TC010
+    name: "Запуск тестов pytest"
+    description: "Все тесты проходят успешно"
+    command: "pytest tests/ -v"
+    expected_result: "Все тесты passed"
+    priority: "critical"
